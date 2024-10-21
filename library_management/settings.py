@@ -30,7 +30,8 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = ['https://my-bank-lyzw.onrender.com', 'https://*.127.0.0.1']
 
 
 # Application definition
@@ -98,23 +99,23 @@ WSGI_APPLICATION = 'library_management.wsgi.application'
 # }
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env("DB_NAME"),
-        'USER': env("DB_USER"),
-        'PASSWORD': env("DB_PASSWORD"),
-        'HOST': env("DB_HOST"),
-        'PORT': env("DB_PORT"),
-    }
-}
-
-
 # DATABASES = {
-#     'default': dj_database_url.config(
-#         default='postgresql://banking_app_si1d_user:98TWkB9itStwd8Uq4XpIM7VV6wvEPlnV@dpg-cs9luci3esus739hn8gg-a.oregon-postgres.render.com/banking_app_si1d',
-#     )
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': env("DB_NAME"),
+#         'USER': env("DB_USER"),
+#         'PASSWORD': env("DB_PASSWORD"),
+#         'HOST': env("DB_HOST"),
+#         'PORT': env("DB_PORT"),
+#     }
 # }
+
+
+DATABASES = {
+    'default': dj_database_url.config(
+        default='postgresql://my_library_8w4h_user:0GBqJ3grPwCFI9AKqYofnLDTU7AjP7B1@dpg-csbdh09u0jms73fedc00-a.oregon-postgres.render.com/my_library_8w4h',
+    )
+}
 
 
 # Password validation
