@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="bg-red-200 text-gray-800 py-5">
+
+        {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-2" role="alert">
+                    <p class="font-bold">Error!</p>
+                    <p class="block sm:inline">{{ error }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="container mx-auto max-w-3xl bg-white p-5 rounded-lg shadow-lg">
+            <h1 class="text-2xl font-semibold text-center text-gray-800 mb-4">Your Borrowed Books</h1>
+            <h2>Total borrowed book/s : {{borrowed_books|length}}</h2>
+            {% if borrowed_books %}
+                <ul class="list-none p-0">
+                    {% for borrowing in borrowed_books %}
+                        <li class="bg-gray-200 flex items-center p-4 rounded-lg mb-2 transition duration-200 hover:bg-gray-300">
+                            <img src="{{ borrowing.book.image.url }}" alt="{{ borrowing.book.title }} cover image" class="w-24 h-32 rounded mr-4">
+                            <div>
+                                <strong class="text-blue-600">Book:</strong> {{ borrowing.book.title }}<br>
+                                <strong class="text-blue-600">Borrowed On:</strong> {{ borrowing.timestamp }}<br>
+                                <strong class="text-blue-600">Borrowing Price:</strong> {{ borrowing.book.borrowing_price }}
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-center italic text-gray-600">You have not borrowed any books.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
